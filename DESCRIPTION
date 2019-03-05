@@ -1,0 +1,18 @@
+Package: loci2migrate
+Type: Package
+Title: From Loci to Migrate
+Description: Convert ipyrad's output file (*.loci) into migrate-n's input file
+Version: 0.0.1
+Date: 2019-03-05
+Authors@R:
+   person(given = "Jin Yung",
+             family = "Wong",
+             role = c("aut", "cre"),
+             email = "wongjinyung@gmail.com")
+Description: 
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends:
+    R(>= 3.3.0)
+URL: https://github.com/jinyung/loci2migrate
