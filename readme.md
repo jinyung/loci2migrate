@@ -1,8 +1,9 @@
 # loci2migrate
 
 [![Travis-CI Build Status](https://travis-ci.org/jinyung/loci2migrate.svg?branch=master)](https://travis-ci.org/jinyung/loci2migrate)
+[![DOI](https://zenodo.org/badge/173910292.svg)](https://zenodo.org/badge/latestdoi/173910292)
 
-## Use
+## Download
 Install the package and use:
 ```R
 devtools::install_github("jinyung/loci2migrate")
@@ -13,7 +14,7 @@ Or just source the function:
 source('https://raw.githubusercontent.com/jinyung/loci2migrate/master/R/loci2migrate.R')
 ```
 
-Usage:
+## Usage:
 
 ```R
 loci2migrate(locipath, poppath, filename)
@@ -23,7 +24,7 @@ Where,
 
 |  |  |
 | ----------- | ----------------------------------------------- |
-| `locipath`  | (char) path to `*.loci` to be converted         |
+| `locipath`  | (char) path to `.loci` to be converted          |
 | `poppath`   | (char) path to file contains population info \* |
 | `filename`  | (char) path for output file                     |
 
@@ -41,3 +42,4 @@ Ind7  Pop3
 Ind8  Pop3
 Ind9  Pop3
 ```
+ 
