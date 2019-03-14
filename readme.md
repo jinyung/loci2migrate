@@ -42,4 +42,24 @@ Ind7  Pop3
 Ind8  Pop3
 Ind9  Pop3
 ```
- 
+
+## Citation:
+
+something looks like this:
+
+> Wong, J. Y. (2019) loci2migrate version 0.0.1. doi: 10.5281/zenodo.2583680
+
+
+or bibtex:
+
+```
+@misc{loci2migrate,
+  doi = {10.5281/zenodo.2583680},
+  year = 2019,
+  author = {JY Wong},
+  title = {loci2migrate v0.0.1},
+  url = {https://github.com/jinyung/loci2migrate} 
+}
+```
+
+(Change the version number and doi number for which you use)
