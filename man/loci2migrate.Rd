@@ -15,4 +15,9 @@ loci2migrate(locipath, poppath, filename)
 \value{
 a converted file
 }
+\details{
+if any locus is not found in all the populations, it will be determined as
+"missing locus" and removed. You can find which locus are removed in the 
+metadata header of the converted file.
+}
  
