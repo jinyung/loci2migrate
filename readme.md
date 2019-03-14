@@ -1,7 +1,7 @@
 # loci2migrate
 
 [![Travis-CI Build Status](https://travis-ci.org/jinyung/loci2migrate.svg?branch=master)](https://travis-ci.org/jinyung/loci2migrate)
-[![DOI](https://zenodo.org/badge/173910292.svg)](https://zenodo.org/badge/latestdoi/173910292)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2583679.svg)](https://doi.org/10.5281/zenodo.2583679)
 
 ## Download
 Install the package and use:
@@ -47,19 +47,19 @@ Ind9  Pop3
 
 something looks like this:
 
-> Wong, J. Y. (2019) loci2migrate version 0.0.1. doi: 10.5281/zenodo.2583680
+> Wong, J. Y. (2019) loci2migrate version 0.0.2. doi: 10.5281/zenodo.2583679
 
 
 or bibtex:
 
 ```
 @misc{loci2migrate,
-  doi = {10.5281/zenodo.2583680},
+  doi = {10.5281/zenodo.2583679},
   year = 2019,
   author = {JY Wong},
-  title = {loci2migrate v0.0.1},
+  title = {loci2migrate v0.0.2},
   url = {https://github.com/jinyung/loci2migrate} 
 }
 ```
 
-(Change the version number and doi number for which you use)
+(Change the version number for which you use)
