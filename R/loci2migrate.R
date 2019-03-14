@@ -10,13 +10,13 @@ loci2migrate <- function(locipath, poppath, filename) {
   
   # loop thru each line
   for (i in seq_along(loci)) {
-    if(!startsWith(loci[i], '//')) {  # read the sequence
+    if (!startsWith(loci[i], '//')) {  # read the sequence
       j <- j + 1	# j keep track of ind #
       sp_ln <- unlist(strsplit(loci[i], ' '))
       ind[j] <- sp_ln[1]
       seq[j] <- tail(sp_ln, 1)
     } else {  # read the locus label
-      if(is.null(j_end))
+      if (is.null(j_end))
         j_end = 1
       sp_ln <- unlist(strsplit(loci[i], ' '))
       # get the label and clean other symbols 
@@ -25,6 +25,16 @@ loci2migrate <- function(locipath, poppath, filename) {
       locus[j_end:j] <- gsub('|', '', locus_tmp, fixed = TRUE)
       j_end <- j + 1  # j_end keep track of last ind of last locus
     }
+  }
+  
+  # check for spelling error in ind label
+  wrong_spell <- !(popdat[, 1] %in% ind)
+  if (any(wrong_spell)) {
+    stop('Not all ind label are found in the .loci file, please check whether\n',
+         'you spelt the below entry wrong in the pop file* or you wish to ', 
+         'remove \nthe entry from the pop file:\n', 
+         paste0(popdat[which(wrong_spell), 1], ' (line', which(wrong_spell), 
+                ')\n'), '*Note: label is case sensitive')
   }
   
   # match population
