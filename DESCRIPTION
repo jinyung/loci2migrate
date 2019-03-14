@@ -2,8 +2,8 @@ Package: loci2migrate
 Type: Package
 Title: From Loci to Migrate
 Description: Convert ipyrad's output file (*.loci) into migrate-n's input file
-Version: 0.0.1
-Date: 2019-03-05
+Version: 0.0.2
+Date: 2019-03-14
 Authors@R:
    person(given = "Jin Yung",
              family = "Wong",
