@@ -28,13 +28,21 @@ loci2migrate <- function(locipath, poppath, filename) {
   }
   
   # check for spelling error in ind label
-  wrong_spell <- !(popdat[, 1] %in% ind)
-  if (any(wrong_spell)) {
+  wrong_spell_in_pop <- !(popdat[, 1] %in% ind)
+  if (any(wrong_spell_in_pop)) {
     stop('Not all ind label are found in the .loci file, please check whether\n',
          'you spelt the below entry wrong in the pop file* or you wish to ', 
          'remove \nthe entry from the pop file:\n', 
          paste0(popdat[which(wrong_spell), 1], ' (line', which(wrong_spell), 
                 ')\n'), '*Note: label is case sensitive')
+  }
+  wrong_spell_in_loci <- !(ind %in% popdat[, 1])  # quick fix
+  if (any(wrong_spell_in_loci)) {
+    stop('loci file contains ind label not found in pop file, please check\n',
+         'whether there is an spelling error in loci file, specifically ', 
+         'the following ind labels:\n', 
+         paste(ind[which(!ind %in% popdat[, 1])], collapse = ', '),
+         '\n*Note: label is case sensitive')
   }
   
   # match population
@@ -43,7 +51,7 @@ loci2migrate <- function(locipath, poppath, filename) {
   }
   
   # sequence length
-  seq_len <- sapply(seq, nchar, USE.NAMES = FALSE)
+  seqlen <- sapply(seq, nchar, USE.NAMES = FALSE)
   
   # open connection for writing
   filecon <- file(filename, "wt")
@@ -72,21 +80,21 @@ loci2migrate <- function(locipath, poppath, filename) {
   
   # combine all extracted info into a big dataframe
   dat <- data.frame(ind = ind, locus = locus, pop = as.factor(pop), seq = seq, 
-                    seq_len = seq_len)[locus_keep_idx_ind, ]
+                    seqlen = seqlen)[locus_keep_idx_ind, ]
   dat$locus <- droplevels(dat$locus)
   
   # and clear memory 
-  rm(ind, locus, pop, seq, seq_len)
+  rm(ind, locus, pop, seq, seqlen)
   
   # first sort by pop 
   for (i in seq_along(levels(dat$pop))) {  
     dat_sub <- subset(dat, dat$pop == levels(dat$pop)[i])
     dat_sub$locus <- droplevels(dat_sub$locus)
     # write summary
-    seq_len_total <- as.integer(xtabs(dat_sub$seq_len~dat_sub$locus))
+    seqlen_total <- as.integer(xtabs(dat_sub$seqlen~dat_sub$locus))
     n_ind_locus <- table(dat_sub$locus)
     if (i == 1)
-      cat(file = filecon, seq_len_total/n_ind_locus, '\n')
+      cat(file = filecon, seqlen_total/n_ind_locus, '\n')
     cat(file = filecon, n_ind_locus, levels(dat$pop)[i], '\n')
     
     # then sort by locus
