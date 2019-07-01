@@ -45,6 +45,12 @@ loci2migrate <- function(locipath, poppath, filename) {
          '\n*Note: label is case sensitive')
   }
   
+  # check pop, anything starts with number?
+  pop_start_num <- grepl("^[0-9]", as.character(popdat[, 2]))
+  if (any(pop_start_num))
+    stop('Population name should not starts with a number, perhaps change these ', 
+         'names?:\n', paste(popdat[pop_start_num, 2], collapse = ', '))
+  
   # match population
   for (i in seq_along(ind)) {
     pop[i] <- as.character(popdat[, 2][popdat[, 1] == ind[i]])
@@ -106,12 +112,20 @@ loci2migrate <- function(locipath, poppath, filename) {
       
       # then write ind and seq
       for (k in seq_along(dat_sub2$ind)) {
-        cat(file = filecon, as.character(dat_sub2$ind[k]), '\t', 
+        # check if ind label more than 10char, if true then trim
+        ind_to_write <- as.character(dat_sub2$ind[k])
+        ind_to_write <- ifelse(nchar(ind_to_write) <= 10, ind_to_write, 
+                               substring(ind_to_write, 1, 10))
+        cat(file = filecon, ind_to_write, '\t', 
             as.character(dat_sub2$seq[k]), '\n')
       }
     }
   }
   
+  # give a warning if trimming of ind label was done
+  if (any(sapply(as.character(dat$ind), nchar) > 10))
+    warning('ind labels with >10 characters found and were trimmed to first 10')
+    
   # close file end writing
   close(filecon)
 } 
